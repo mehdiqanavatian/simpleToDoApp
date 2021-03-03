@@ -1,0 +1,390 @@
+html {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: inherit;
+          box-sizing: inherit;
+  outline: none;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.main {
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  background: linear-gradient(-45deg, #3cc95a, #1f95cc);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  overflow-y: auto;
+}
+
+.todo-card {
+  position: relative;
+  background: linear-gradient(45deg, #3cc95a, #1f95cc);
+  border: 3px solid #ffae00;
+  border-radius: 0.5rem;
+  -webkit-box-flex: 0;
+      -ms-flex-positive: 0;
+          flex-grow: 0;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  width: 100%;
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+
+.todo-card .todo-card-title {
+  padding: 0.5rem;
+  background-color: #ffae0086;
+  cursor: pointer;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  font-weight: bold;
+  padding-right: 3rem;
+  word-wrap: break-word;
+}
+
+.todo-card .todo-card-title:hover {
+  background-color: #ff000086;
+  color: #ffffff;
+}
+
+.todo-card .todo-card-subject {
+  padding: 0.5rem;
+  display: none;
+}
+
+.todo-card .todo-card-delete,
+.todo-card .todo-card-edit {
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  opacity: 0;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border: solid 1px #ffffff5d;
+  border-radius: 0.1rem;
+  font-family: "Courier New", Courier, monospace;
+  -webkit-transition: background-color 0.3s linear, opacity 0.5s, border 0.5s;
+  transition: background-color 0.3s linear, opacity 0.5s, border 0.5s;
+  cursor: pointer;
+  top: 0.5rem;
+}
+
+.todo-card .todo-card-delete:hover,
+.todo-card .todo-card-edit:hover {
+  background-color: #d63333;
+  border: solid 1px #0000005d;
+}
+
+.todo-card .todo-card-delete {
+  background-color: #d84949;
+  right: 0.5rem;
+  width: 1rem;
+  height: 1rem;
+}
+
+.todo-card .todo-card-delete:hover {
+  background-color: #d63333;
+  border: solid 1px #0000005d;
+}
+
+.todo-card .todo-card-edit {
+  background-color: #66d849;
+  right: 1.7rem;
+  width: 1rem;
+  height: 1rem;
+}
+
+.todo-card .todo-card-edit:hover {
+  background-color: #61d633;
+  border: solid 1px #0000005d;
+}
+
+.todo-card .open {
+  padding: 0.5rem;
+  display: block;
+}
+
+.todo-card:hover .todo-card-delete,
+.todo-card:hover .todo-card-edit {
+  opacity: 1;
+}
+
+.editMenu {
+  position: fixed;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  bottom: 1rem;
+  right: 1rem;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.5rem;
+  background-color: #141414;
+  z-index: 1;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  overflow: hidden;
+}
+
+.editMenu form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  padding: 10%;
+}
+
+.editMenu form input,
+.editMenu form button,
+.editMenu form label {
+  opacity: 0;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  width: 100%;
+}
+
+.editMenu form label {
+  color: #48ec6c;
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.editMenu form button {
+  margin-top: 1rem;
+}
+
+.addTodo {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.5rem;
+  background-color: #141414;
+  z-index: 2;
+  cursor: pointer;
+}
+
+.addTodo::before {
+  content: "";
+  position: absolute;
+  width: 50%;
+  height: 2px;
+  left: 50%;
+  top: 20%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  border: 1px solid white;
+  border-left: 0;
+  border-right: 0;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.addTodo::after {
+  content: "";
+  position: absolute;
+  width: 50%;
+  height: 2px;
+  left: 50%;
+  top: 80%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  border: 1px solid white;
+  border-left: 0;
+  border-right: 0;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.addTodo:hover::before {
+  -webkit-transform: translate(-50%, -50%) rotateZ(90deg);
+          transform: translate(-50%, -50%) rotateZ(90deg);
+  top: 50%;
+}
+
+.addTodo:hover::after {
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+.addTodoMenu {
+  position: fixed;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  bottom: 1rem;
+  right: 1rem;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.5rem;
+  background-color: #141414;
+  z-index: 1;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  overflow: hidden;
+}
+
+.addTodoMenu form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  padding: 10%;
+}
+
+.addTodoMenu form input,
+.addTodoMenu form button,
+.addTodoMenu form label {
+  opacity: 0;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  width: 100%;
+}
+
+.addTodoMenu form label {
+  color: #48ec6c;
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.addTodoMenu form button {
+  margin-top: 1rem;
+}
+
+.active {
+  width: 100%;
+  height: 100%;
+  bottom: 0;
+  right: 0;
+  z-index: 3;
+}
+
+.active form input,
+.active form button,
+.active form label {
+  opacity: 1;
+}
+
+.txtMessage {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  border-radius: 0.3rem;
+  -webkit-transform: translate(-50%, 0%);
+          transform: translate(-50%, 0%);
+  padding: 1rem;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  border: 1px solid;
+  opacity: 0;
+  z-index: 10;
+}
+
+.green {
+  background-color: #7fe76a;
+  color: #288415;
+  border-color: #288415;
+  opacity: 1;
+}
+
+.red {
+  background-color: #e76b6b;
+  color: #841515;
+  border-color: #841515;
+  opacity: 1;
+}
+
+.yellow {
+  background-color: #e7d56b;
+  color: #847315;
+  border-color: #847315;
+  opacity: 1;
+}
+
+.blue {
+  background-color: #6ba5e7;
+  color: #154984;
+  border-color: #154984;
+  opacity: 1;
+}
+
+@media screen and (min-width: 700px) {
+  .active {
+    width: 25rem;
+    height: 25rem;
+    bottom: 0;
+    right: 0;
+  }
+  .active form input,
+  .active form button,
+  .active form label {
+    opacity: 1;
+  }
+}
+/*# sourceMappingURL=style.css.map */
